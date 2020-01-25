@@ -20,7 +20,8 @@ matrix:
       env: NOXSESSION=tests-3.8
 
 install:
-  - pip3 install nox
+  - pyenv global 3.7.1
+  - python3.7 -m pip install nox
 
 script:
-  - python3 -m nox
+  - python3.7 -m nox
