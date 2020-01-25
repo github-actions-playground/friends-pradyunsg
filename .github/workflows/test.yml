@@ -33,7 +33,7 @@ jobs:
       name: Install Python 3.x
       with:
         python-version: 3.x
-      if: matrix.python_version == "2.7"
+      if: matrix.python_version == '2.7'
 
     - name: Install dependencies
       run: |
