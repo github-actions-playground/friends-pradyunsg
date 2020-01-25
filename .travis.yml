@@ -4,6 +4,8 @@ python: 3.8
 
 matrix:
   include:
+    - env: NOXSESSION=docs
+    - env: NOXSESSION=lint
     - python: 2.7
       env: NOXSESSION=tests-2.7
     - python: 3.4
@@ -16,8 +18,6 @@ matrix:
       env: NOXSESSION=tests-3.7
     - python: 3.8
       env: NOXSESSION=tests-3.8
-    - env: NOXSESSION=lint
-    - env: NOXSESSION=docs
 
 install:
   - pip3 install nox
