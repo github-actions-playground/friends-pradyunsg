@@ -39,7 +39,7 @@ jobs:
     - name: Workaround for Windows Python 2.7
       # This is in PATH, so nox resolves to it - but then subsequent steps fail
       run: rm C:/ProgramData/Chocolatey/bin/python2.7.exe
-      if: matrix.os == 'windows-latest' && matrix.env.PYTHON_VERSION == '2.7'
+      if: matrix.os == 'windows-2019' && matrix.env.PYTHON_VERSION == '2.7'
 
     - name: Install dependencies
       run: |
