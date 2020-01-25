@@ -20,7 +20,7 @@ matrix:
     - env: NOXSESSION=docs
 
 install:
-  - pip install nox
+  - pip3 install nox
 
 script:
-  - nox
+  - python3 -m nox
