@@ -36,11 +36,10 @@ jobs:
       if: matrix.python_version == '2.7'
 
     # Workaround https://github.com/theacodes/nox/issues/250
-    - name: Python 2 on Windows workaround
-      run: |
-        Remove-Item C:\ProgramData\Chocolatey\bin\python2.7.exe
-      shell: bash
-      if: matrix.python_version == '2.7'
+    - name: Workaround for Windows Python 2.7
+      # This is in PATH, so nox resolves to it - but then subsequent steps fail
+      run: rm C:/ProgramData/Chocolatey/bin/python2.7.exe
+      if: matrix.os == 'windows-latest' && matrix.env.PYTHON_VERSION == '2.7'
 
     - name: Install dependencies
       run: |
