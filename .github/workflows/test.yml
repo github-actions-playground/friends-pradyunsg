@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, windows-2019, macOS-latest]
         # Python 3.4 is not available from actions/setup-python@v1.
         python_version: ['2.7', '3.5']
 
@@ -40,7 +40,7 @@ jobs:
       # This is in PATH, so nox resolves to it - but then subsequent steps fail
       run: rm C:/ProgramData/Chocolatey/bin/python2.7.exe
       shell: bash
-      if: matrix.os == 'windows-latest' && matrix.python_version == '2.7'
+      if: matrix.os == 'windows-2019' && matrix.python_version == '2.7'
 
     - name: Install dependencies
       run: |
