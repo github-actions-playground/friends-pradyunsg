@@ -37,11 +37,11 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip3 install --upgrade pip
-        pip3 install nox
+        python -m pip install --upgrade pip
+        python -m pip install nox
       shell: bash
 
     - name: Run nox
       run: |
-        python3 -m nox -s tests-${{ matrix.python_version }}
+        python -m nox -s tests-${{ matrix.python_version }}
       shell: bash
