@@ -35,6 +35,13 @@ jobs:
         python-version: 3.x
       if: matrix.python_version == '2.7'
 
+    # Work around https://github.com/theacodes/nox/issues/250
+    - name: Python 2 on Windows workaround
+      run: |
+        Remove-Item C:\ProgramData\Chocolatey\bin\python2.7.exe
+      shell: bash
+      if: matrix.python_version == '2.7'
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
