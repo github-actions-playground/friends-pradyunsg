@@ -21,26 +21,34 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v1
+
       # Install *all* Python versions
-      - uses: actions/setup-python@v1
+      - name: Install PyPy2
+        uses: actions/setup-python@v1
         with:
           python-version: pypy2
-      - uses: actions/setup-python@v1
+      - name: Install PyPy3
+        uses: actions/setup-python@v1
         with:
           python-version: pypy3
-      - uses: actions/setup-python@v1
+      - name: Install Python 2.7
+        uses: actions/setup-python@v1
         with:
           python-version: 2.7
-      - uses: actions/setup-python@v1
+      - name: Install Python 3.5
+        uses: actions/setup-python@v1
         with:
           python-version: 3.5
-      - uses: actions/setup-python@v1
+      - name: Install Python 3.6
+        uses: actions/setup-python@v1
         with:
           python-version: 3.6
-      - uses: actions/setup-python@v1
+      - name: Install Python 3.7
+        uses: actions/setup-python@v1
         with:
           python-version: 3.7
-      - uses: actions/setup-python@v1
+      - name: Install Python 3.8
+        uses: actions/setup-python@v1
         with:
           python-version: 3.8
 
