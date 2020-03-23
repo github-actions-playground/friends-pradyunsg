@@ -1,27 +1,38 @@
 language: python
 cache: pip
+dist: xenial
 python: 3.8
 
-matrix:
+env:
+  global:
+    - PIP_UNSTABLE_FEATURE=
+
+stages:
+- primary
+- secondary
+- experimental
+
+jobs:
   include:
-    - env: NOXSESSION=docs
-    - env: NOXSESSION=lint
-    - python: 2.7
-      env: NOXSESSION=tests-2.7
-    - python: 3.4
-      env: NOXSESSION=tests-3.4
-    - python: 3.5
-      env: NOXSESSION=tests-3.5
-    - python: 3.6
-      env: NOXSESSION=tests-3.6
-    - python: 3.7
-      env: NOXSESSION=tests-3.7
-    - python: 3.8
-      env: NOXSESSION=tests-3.8
+    # Basic Checks
+    - stage: primary
+      env: NOXSESSION=primary
 
-install:
-  - pyenv global 3.7.1
-  - python3.7 -m pip install nox
+    # Complete checking for ensuring compatibility
+    # PyPy
+    - stage: secondary
+      env: NOXSESSION=secondary
+      python: pypy3.5-7.0.0
 
-script:
-  - python3.7 -m nox
+    # Test experimental stuff that are not part of the standard pip usage.
+    # Helpful for developers working on them to see how they're doing.
+    - stage: experimental
+      env: NOXSESSION=experimental PIP_UNSTABLE_FEATURE=resolver GROUP=1
+    - env: NOXSESSION=experimental PIP_UNSTABLE_FEATURE=resolver GROUP=2
+
+  fast_finish: true
+  allow_failures:
+    - env: NOXSESSION=experimental PIP_UNSTABLE_FEATURE=resolver
+
+install: pip install nox
+script: nox
