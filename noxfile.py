@@ -1,19 +1,19 @@
 import nox
 
 
-@nox.session
+@nox.session(python=False)
 def primary(session):
     session.log("============ PRIMARY ============")
     session.run("python", "--version")
 
 
-@nox.session
+@nox.session(python=False)
 def secondary(session):
     session.log("============ SECONDARY ============")
     session.run("python", "--version")
 
 
-@nox.session(python="3.8")
+@nox.session(python=False)
 def experimental(session):
     session.log("============ EXPERIMENTAL ============")
     session.run("python", "--version")
