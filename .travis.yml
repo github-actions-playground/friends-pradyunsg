@@ -2,10 +2,43 @@ language: python
 cache: pip
 dist: xenial
 python: 3.8
+addons:
+  apt:
+    packages:
+    - bzr
+
+stages:
+- Quality Checks
+- Test Runs
 
 jobs:
   include:
-    - env: NOXSESSION=primary
+    # Basic Checks
+    - stage: Quality Checks
+      env: TOXENV=docs
+    - env: TOXENV=lint
+
+    # PyPy
+    - stage: Test Runs
+      env: GROUP=1
+      python: pypy3.5-7.0.0
+    - env: GROUP=2
+      python: pypy3.5-7.0.0
+    - env: GROUP=1
+      python: pypy2.7-7.1.1
+    - env: GROUP=2
+      python: pypy2.7-7.1.1
+    # Under-development resolver
+    - env:
+      - GROUP=1
+      - PIP_UNSTABLE_FEATURE=resolver
+    - env:
+      - GROUP=2
+      - PIP_UNSTABLE_FEATURE=resolver
+
+  fast_finish: true
+  allow_failures:
+    - env: PIP_UNSTABLE_FEATURE=resolver
 
 install: pip install nox
 script: nox
